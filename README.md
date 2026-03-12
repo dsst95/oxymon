@@ -1,4 +1,5 @@
 # oxymon
+![](oxymon-logo.jpg)
 *Rust-based SpO2 Monitoring Project*
 
 This project focuses on developing a SpO2 monitoring system using the MAX30105 sensor mounted on a SparkFun breakout board, interfaced with the STM32F429I-DISC1 discovery board.
