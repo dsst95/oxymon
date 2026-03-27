@@ -1,0 +1,56 @@
+import { VerticalBox, GridBox } from "std-widgets.slint";
+import { SplashScreen } from "./splashScreen.slint";
+import { BpmGauge } from "gauges/bpmGauge.slint";
+import { OxygenationGauge } from "gauges/oxygenationGauge.slint";
+import { TemperatureGauge } from "gauges/temperatureGauge.slint";
+import { MeasurementScreen } from "measurementScreen.slint";
+
+export enum AppState {
+  SplashScreen,
+  MeasurementScreen,
+  BpmGauge,
+  OxygenationGauge,
+  TemperatureGauge
+}
+
+export component MultiView {
+  in property <AppState> state;
+  height: 100%;
+  width: 100%;
+
+  Rectangle {
+    SplashScreen {
+      visible: state == AppState.SplashScreen;
+    }
+    MeasurementScreen {
+      visible: state == AppState.MeasurementScreen;
+    }
+    VerticalBox {
+      visible: state == AppState.BpmGauge;
+      padding: 1rem;
+
+      BpmGauge {
+        visible: state == AppState.BpmGauge;
+        value: 60;
+      }
+    }
+    VerticalBox {
+      visible: state == AppState.OxygenationGauge;
+      padding: 1rem;
+
+      OxygenationGauge {
+        visible: state == AppState.OxygenationGauge;
+        value: 96;
+      }
+    }
+    VerticalBox {
+      visible: state == AppState.TemperatureGauge;
+      padding: 1rem;
+
+      TemperatureGauge {
+        visible: state == AppState.TemperatureGauge;
+        value: 36.5;
+      }
+    }
+  }
+}

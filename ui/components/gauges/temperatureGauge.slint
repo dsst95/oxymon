@@ -1,0 +1,9 @@
+import { Gauge } from "gauge.slint";
+
+export component TemperatureGauge inherits Gauge {
+  gaugeImage: @image-url("../../icons/temp_gauge.svg");
+  variable: "Temp";
+  unit: "°C";
+  minValue: 30;
+  valueIndicatorMoveFactor: 22deg;
+}

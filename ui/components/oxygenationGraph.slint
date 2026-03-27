@@ -1,0 +1,65 @@
+export component OxygenationGraph inherits VerticalLayout {
+  in property <[int]> values;
+  property <brush> graphColor: #1f94ad;
+
+  VerticalLayout {
+    HorizontalLayout {
+      alignment: end;
+
+      // CaptionItem
+      HorizontalLayout {
+        spacing: 1rem;
+
+        VerticalLayout {
+          alignment: center;
+
+          Rectangle {
+            height: 8px;
+            width: 9px;
+            border-radius: 4px;
+            background: graphColor;
+          }
+        }
+
+        Text {
+          text: "SpO₂ [%]";
+          font-size: 1.5rem;
+          horizontal-alignment: center;
+        }
+      }
+    }
+
+    Rectangle {
+      for value[index] in values: Path {
+        opacity: 0.7;
+        fill: @linear-gradient(180deg, graphColor, transparent 100%);
+        viewbox-width: self.width / 1px;
+        viewbox-height: self.height / 1px;
+
+        MoveTo {
+          x: index / (values.length - 1) * parent.viewbox-width;
+          y: parent.viewbox-height - (value / 100) * parent.viewbox-height;
+        }
+
+        CubicTo {
+          x: (index + 1) / (values.length - 1) * parent.viewbox-width;
+          y: parent.viewbox-height - (values[index + 1] / 100) * parent.viewbox-height;
+          control-1-x: (index + 0.33) / (values.length - 1) * parent.viewbox-width;
+          control-1-y: parent.viewbox-height - (value / 100) * parent.viewbox-height;
+          control-2-x: (index + 0.67) / (values.length - 1) * parent.viewbox-width;
+          control-2-y: parent.viewbox-height - (values[index + 1] / 100) * parent.viewbox-height;
+        }
+
+        LineTo {
+          x: (index + 1) / (values.length - 1) * parent.viewbox-width;
+          y: parent.viewbox-height;
+        }
+
+        LineTo {
+          x: index / (values.length - 1) * parent.viewbox-width;
+          y: parent.viewbox-height;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+import { GridBox } from "std-widgets.slint";
+import { BpmGauge } from "gauges/bpmGauge.slint";
+import { OxygenationGauge } from "gauges/oxygenationGauge.slint";
+import { TemperatureGauge } from "gauges/temperatureGauge.slint";
+import { OxygenationGraph } from "oxygenationGraph.slint";
+
+export component MeasurementScreen {
+  height: 100%;
+  width: 100%;
+
+  GridLayout {
+    spacing: 0.5rem;
+    padding: 1rem;
+
+    Row {
+      BpmGauge {
+        value: 60;
+      }
+      OxygenationGauge {
+        value: 96;
+      }
+      TemperatureGauge {
+        value: 36.5;
+      }
+    }
+    Row {
+      OxygenationGraph {
+        colspan: 3;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+import { MultiView, AppState } from "components/multiView.slint";
+import { GroupBox } from "std-widgets.slint";
+
+export component MainWindow inherits Window {
+  in property <AppState> state;
+  no-frame: true;
+  full-screen: true;
+
+  MultiView {
+    state: AppState.MeasurementScreen;
+  }
+}

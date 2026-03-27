@@ -1,0 +1,9 @@
+import { Gauge } from "gauge.slint";
+
+export component OxygenationGauge inherits Gauge {
+  gaugeImage: @image-url("../../icons/spo2_gauge.svg");
+  variable: "SpO₂";
+  unit: "%";
+  valueIndicatorMoveFactor: 11deg;
+  minValue: 80;
+}

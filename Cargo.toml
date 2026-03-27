@@ -6,21 +6,40 @@ license = "GNU General Public License v3.0"
 publish = false
 
 [dependencies]
-embassy-stm32 = { version = "0.5.0", features = ["defmt", "stm32f429zi", "memory-x"] }
-embassy-executor = { version = "0.9.1", features = ["arch-cortex-m", "executor-thread", "defmt"]}
+embassy-stm32 = { version = "0.5.0", features = [
+  "defmt",
+  "stm32f429zi",
+  "memory-x",
+] }
+embassy-executor = { version = "0.9.1", features = [
+  "arch-cortex-m",
+  "executor-thread",
+  "defmt",
+] }
 
 defmt = "1.0.1"
 defmt-rtt = "1.0.0"
 
-cortex-m = { version = "0.7.6", features = ["inline-asm", "critical-section-single-core"] }
+cortex-m = { version = "0.7.6", features = [
+  "inline-asm",
+  "critical-section-single-core",
+] }
 cortex-m-rt = "0.7.0"
 
 panic-probe = { version = "1.0.0", features = ["print-defmt"] }
+slint = { version = "1.15.1", default-features = false, features = [
+  "compat-1-2",
+  "unsafe-single-threaded",
+  "libm",
+] }
 
 [profile.release]
 debug = 2
 
+[build-dependencies]
+slint-build = "1.15.1"
+
 [package.metadata.embassy]
 build = [
-  { target = "thumbv7em-none-eabi", artifact-dir = "out/examples/stm32f4" }
+  { target = "thumbv7em-none-eabi", artifact-dir = "out/examples/stm32f4" },
 ]

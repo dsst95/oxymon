@@ -1,0 +1,38 @@
+export component Gauge inherits Rectangle {
+  in property <float> value: 0;
+  in property <float> minValue: 0;
+  in property <angle> valueIndicatorMoveFactor: 1deg;
+  in property <image> gaugeImage;
+  in property <string> unit;
+  in property <string> variable;
+
+  Image {
+    source: gaugeImage;
+    image-fit: ImageFit.contain;
+    height: 100%;
+    width: 100%;
+  }
+  Image {
+    source: @image-url("../../icons/gauge_indicator.svg");
+    transform-rotation: max(min((value - minValue) * valueIndicatorMoveFactor, 220deg), 0deg);
+    image-fit: ImageFit.contain;
+    height: 100%;
+    width: 100%;
+  }
+  Text {
+    text: variable;
+    font-family: "Sans";
+    font-weight: 800;
+    font-size: 1.5rem;
+    horizontal-alignment: TextHorizontalAlignment.center;
+    vertical-alignment: TextVerticalAlignment.center;
+  }
+  Text {
+    text: value + " " + unit;
+    font-family: "Sans";
+    font-weight: 800;
+    font-size: 1.5rem;
+    horizontal-alignment: TextHorizontalAlignment.center;
+    y: parent.height * 0.6;
+  }
+}
